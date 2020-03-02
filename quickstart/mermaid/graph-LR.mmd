@@ -1,0 +1,36 @@
+graph LR
+    H(Unselect_alarm) -.- B
+    A -.- H
+    A((Alarms)) -- Processing --> B[Select_alarm]
+    B --> F(Commit_alarm)
+    subgraph Alarm audit
+    F --> G(Audit_alarm)
+    end
+
+    G -->D
+    B --> E(Accept_alarm)
+    A --processing--> C(Reset_alarm)
+    B --> C
+    E --> C
+    C --> D(Alarm_logs)
+
+    A[Square Rect] -- Link text --> B((Circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+    D --> E
+
+    client-->|2 findConfigServices|LoadBalancer;
+    LoadBalancer-->|3 findService|metaServer;
+    metaServer-->Eureka;
+    client-->|4 access via ip:port/client load balance/error retry|ConfigService;
+    ConfigService-->|1 register/cancel|Eureka;
+    ConfigService-->|read/write|ConfigDB;
+
+
+    Portal-->|发布/更新配置|Apollo配置中心;
+    Apollo配置中心-->|实时推送|App;
+    App-->|实时查询|Apollo配置中心;
+
+
+
