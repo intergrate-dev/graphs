@@ -2,10 +2,6 @@
 
 ## 主题  
 
-### pulugins supported
-
-![plugins](./output/plugins.png)
-
 ### table
 
 | 时间 | 地点 | 计划 |
